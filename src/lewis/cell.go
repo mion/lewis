@@ -37,3 +37,15 @@ func (c *Cell) toString(root bool) string {
 func (c *Cell) String() string {
 	return c.toString(true)
 }
+
+func (c *Cell) Push(a Any) {
+	if c.Cdr != nil {
+		c.Cdr.Push(a)
+	} else {
+		c.Cdr = NewCell(a)
+	}
+}
+
+func (c *Cell) Pop() Any {
+	return nil
+}

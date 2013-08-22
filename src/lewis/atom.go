@@ -14,7 +14,7 @@ func (a *Atom) String() string {
 	if a.IsLiteral {
 		return fmt.Sprintf("{%v: %v}", reflect.TypeOf(a.Value), a.Value)
 	} else {
-		return fmt.Sprintf("{identifier: %v}", a.Value)
+		return fmt.Sprintf("{ID: %v}", a.Value)
 	}
 }
 
