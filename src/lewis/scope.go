@@ -15,6 +15,10 @@ func NewSymbol(name string) *Symbol {
 	return sym
 }
 
+func (s *Symbol) String() string {
+	return s.string
+}
+
 var QuoteSymbol = NewSymbol("quote")
 var IfSymbol = NewSymbol("if")
 var SetSymbol = NewSymbol("set!")

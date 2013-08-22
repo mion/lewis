@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	in := "(quote 32)"
+	in := "(begin (if (quote False) (set! a 32) (set! a 50)) a)"
 	p := Parse(in)
 	fmt.Println(in)
 	fmt.Println(Eval(p, NewScope(nil)))

@@ -27,3 +27,19 @@ func IsCell(a Any) bool {
 	_, ok := ToCell(a)
 	return ok
 }
+
+func ToBool(a Any) (bool, bool) {
+	if b, ok := a.(bool); ok {
+		return b, true
+	} else {
+		return false, false
+	}
+}
+
+func AsString(a Any) (string, bool) {
+	if s, ok := a.(string); ok {
+		return s, true
+	} else {
+		return "", false
+	}
+}
