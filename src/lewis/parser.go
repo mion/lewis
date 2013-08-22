@@ -7,13 +7,13 @@ import (
 	"strings"
 )
 
-func Categorize(s string) (*Atom, error) {
+func Categorize(s string) Any {
 	if i, err := scv.ParseInt(s, 0, 64); err == nil {
-		return MakeLiteral(i), nil
+		return i
 	} else if str, err := scv.Unquote(s); err == nil {
-		return MakeLiteral(str), nil
+		return str
 	} else {
-		return MakeIdentifier(s), nil
+		return NewSymbol(s)
 	}
 }
 
@@ -52,8 +52,8 @@ func Parenthesize(tokens *list.List) Any {
 	} else if t == ")" {
 		panic("unexpected )")
 	} else {
-		atom, _ := Categorize(t)
-		return atom
+		x := Categorize(t)
+		return x
 	}
 }
 
