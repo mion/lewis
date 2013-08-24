@@ -48,7 +48,7 @@ func (s *Scope) String() string {
 	}
 	str := "{ "
 	for key, val := range s.table {
-		str += fmt.Sprintf("'%v'= %v, ", key, val)
+		str += fmt.Sprintf("%v: %v, ", key, val)
 	}
 	str += " } --> " + fmt.Sprint(s.parent)
 	return str
@@ -64,12 +64,12 @@ func (s *Scope) Find(name *Symbol) *Scope {
 }
 
 func (s *Scope) Set(name *Symbol, val Any) {
-	for sc := s; s != nil; s = s.parent {
-		if _, ok := sc.table[name]; ok {
-			sc.table[name] = val
-			return
-		}
-	}
+	// for sc := s; s != nil; sc = sc.parent {
+	// 	if _, ok := sc.table[name]; ok {
+	// 		sc.table[name] = val
+	// 		return
+	// 	}
+	// }
 	s.table[name] = val
 }
 

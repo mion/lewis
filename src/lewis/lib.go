@@ -19,49 +19,54 @@ var GlobalScope = &Scope{map[*Symbol]Any{
 	Sym("set!"): func(c *Cell, s *Scope) Any {
 		variable, _ := c.Cadr(1).(*Symbol) // TODO: check error
 		exp := c.Cadr(2)
+		Debug("Setting variable", variable, "to expression", exp)
 		s.Find(variable).Set(variable, Eval(exp, s))
 		return nil
 	},
 	Sym("define"): func(c *Cell, s *Scope) Any {
+		Debug("define form called on cell", c, "in scope", s)
 		variable, _ := c.Cadr(1).(*Symbol) // TODO: check error
-		exp := c.Cadr(2)
-		s.Set(variable, Eval(exp, s))
+		exp := Eval(c.Cadr(2), s)
+		Debug("Define", variable, "as expression", exp)
+		s.Set(variable, exp)
 		return nil
 	},
 	// Temporary
 	Sym("+"): func(c *Cell, s *Scope) Any {
-		a, _ := c.Cadr(1).(int64)
-		b, _ := c.Cadr(2).(int64)
+		Debug("adding ", c.Cadr(1), "to", c.Cadr(2))
+		a, _ := Eval(c.Cadr(1), s).(int64)
+		b, _ := Eval(c.Cadr(2), s).(int64)
+		Debug("converted to int", a, "and ", b, "resulted", a+b)
 		return a + b
 	},
 	Sym("-"): func(c *Cell, s *Scope) Any {
-		a, _ := c.Cadr(1).(int64)
-		b, _ := c.Cadr(2).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int64)
+		b, _ := Eval(c.Cadr(2), s).(int64)
 		return a - b
 	},
 	Sym("<"): func(c *Cell, s *Scope) Any {
-		a, _ := c.Cadr(1).(int64)
-		b, _ := c.Cadr(2).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int64)
+		b, _ := Eval(c.Cadr(2), s).(int64)
 		return a < b
 	},
 	Sym(">"): func(c *Cell, s *Scope) Any {
-		a, _ := c.Cadr(1).(int64)
-		b, _ := c.Cadr(2).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int64)
+		b, _ := Eval(c.Cadr(2), s).(int64)
 		return a > b
 	},
 	Sym("="): func(c *Cell, s *Scope) Any {
-		a, _ := c.Cadr(1).(int64)
-		b, _ := c.Cadr(2).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int64)
+		b, _ := Eval(c.Cadr(2), s).(int64)
 		return a == b
 	},
 	Sym("*"): func(c *Cell, s *Scope) Any {
-		a, _ := c.Cadr(1).(int64)
-		b, _ := c.Cadr(2).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int64)
+		b, _ := Eval(c.Cadr(2), s).(int64)
 		return a * b
 	},
 	Sym("/"): func(c *Cell, s *Scope) Any {
-		a, _ := c.Cadr(1).(int64)
-		b, _ := c.Cadr(2).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int64)
+		b, _ := Eval(c.Cadr(2), s).(int64)
 		return a / b
 	},
 }, nil}
