@@ -65,7 +65,7 @@ func TestScope(t *testing.T) {
 	checkInt(t, s.Get(x), 42)
 }
 
-func checkScope(t *testing.T, name string, s *Scope) bool {
+func checkDefined(t *testing.T, name string, s *Scope) bool {
 	if scp := s.Find(Sym(name)); s != scp {
 		t.Errorf("s.Find(%s) = %v, want %v", name, scp, s)
 		return false
@@ -74,9 +74,9 @@ func checkScope(t *testing.T, name string, s *Scope) bool {
 	}
 }
 
-func checkVariables(t *testing.T, s *Scope, tab map[string]Any) {
+func checkScope(t *testing.T, s *Scope, tab map[string]Any) {
 	for name, value := range tab {
-		if !checkScope(t, name, s) {
+		if !checkDefined(t, name, s) {
 			return
 		}
 		if v := s.Get(Sym(name)); v != value {
@@ -90,29 +90,41 @@ func TestDefineAndSet(t *testing.T) {
 	local := NewScope(above)
 
 	Eval(Parse("(define x 2)"), local)
-	checkVariables(t, local, map[string]Any{"x": 2})
+	checkScope(t, local, map[string]Any{"x": 2})
 	Eval(Parse("(define y 3)"), above)
-	checkVariables(t, local, map[string]Any{"x": 2})
-	checkVariables(t, above, map[string]Any{"y": 3})
+	checkScope(t, local, map[string]Any{"x": 2})
+	checkScope(t, above, map[string]Any{"y": 3})
 	Eval(Parse("(define y 7)"), local)
-	checkVariables(t, above, map[string]Any{"y": 3})
-	checkVariables(t, local, map[string]Any{"x": 2, "y": 7})
+	checkScope(t, above, map[string]Any{"y": 3})
+	checkScope(t, local, map[string]Any{"x": 2, "y": 7})
 	Eval(Parse("(set! y 5)"), local)
-	checkVariables(t, above, map[string]Any{"y": 3})
-	checkVariables(t, local, map[string]Any{"x": 2, "y": 5})
+	checkScope(t, above, map[string]Any{"y": 3})
+	checkScope(t, local, map[string]Any{"x": 2, "y": 5})
 	Eval(Parse("(define z 9)"), above)
 	Eval(Parse("(set! z -3)"), local)
-	checkVariables(t, above, map[string]Any{"y": 3, "z": -3})
-	checkVariables(t, local, map[string]Any{"x": 2, "y": 5})
+	checkScope(t, above, map[string]Any{"y": 3, "z": -3})
+	checkScope(t, local, map[string]Any{"x": 2, "y": 5})
 }
 
 func TestLambda(t *testing.T) {
 	s := NewScope(GlobalScope)
 	if lambda, ok := ParseEval("(lambda (x) (* x x))", s).(func(*Cell, *Scope) Any); ok {
-		c := Cons(nil, Cons(4, Cons(nil, nil)))
+		c := Cons(Sym("qwerty"), Cons(4, Cons(nil, nil)))
 		r := lambda(c, s)
 		checkInt(t, r, 16)
 	}
+	if lambda, ok := ParseEval("(lambda (a b c) (+ a (+ b c)))", s).(func(*Cell, *Scope) Any); ok {
+		c := Cons(Sym("xyz"), Cons(1, Cons(2, Cons(3, Cons(nil, nil)))))
+		r := lambda(c, s)
+		checkInt(t, r, 6)
+	}
+}
+
+func TestBegin(t *testing.T) {
+	s := NewScope(GlobalScope)
+	res := ParseEval("(begin (define x 3) (define y 4) (* x y))", s)
+	checkInt(t, res, 12)
+	checkScope(t, s, map[string]Any{"x": 3, "y": 4})
 }
 
 func TestEval(t *testing.T) {

@@ -51,6 +51,13 @@ var GlobalScope = &Scope{map[*Symbol]Any{
 			return Eval(body, local)
 		}
 	},
+	Sym("begin"): func(c *Cell, s *Scope) Any {
+		var res Any
+		for i := 1; i < c.Len(); i++ {
+			res = Eval(c.Cadr(i), s)
+		}
+		return res
+	},
 	// Temporary
 	Sym("+"): func(c *Cell, s *Scope) Any {
 		Debug("adding ", c.Cadr(1), "to", c.Cadr(2))
