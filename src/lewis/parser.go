@@ -8,8 +8,8 @@ import (
 )
 
 func Categorize(s string) Any {
-	if i, err := scv.ParseInt(s, 0, 64); err == nil {
-		return i
+	if i, err := scv.ParseInt(s, 0, 32); err == nil {
+		return int(i)
 	} else if str, err := scv.Unquote(s); err == nil {
 		return str
 	} else if b, err := scv.ParseBool(s); err == nil {

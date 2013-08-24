@@ -34,39 +34,39 @@ var GlobalScope = &Scope{map[*Symbol]Any{
 	// Temporary
 	Sym("+"): func(c *Cell, s *Scope) Any {
 		Debug("adding ", c.Cadr(1), "to", c.Cadr(2))
-		a, _ := Eval(c.Cadr(1), s).(int64)
-		b, _ := Eval(c.Cadr(2), s).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int)
+		b, _ := Eval(c.Cadr(2), s).(int)
 		Debug("converted to int", a, "and ", b, "resulted", a+b)
 		return a + b
 	},
 	Sym("-"): func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int64)
-		b, _ := Eval(c.Cadr(2), s).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int)
+		b, _ := Eval(c.Cadr(2), s).(int)
 		return a - b
 	},
 	Sym("<"): func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int64)
-		b, _ := Eval(c.Cadr(2), s).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int)
+		b, _ := Eval(c.Cadr(2), s).(int)
 		return a < b
 	},
 	Sym(">"): func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int64)
-		b, _ := Eval(c.Cadr(2), s).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int)
+		b, _ := Eval(c.Cadr(2), s).(int)
 		return a > b
 	},
 	Sym("="): func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int64)
-		b, _ := Eval(c.Cadr(2), s).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int)
+		b, _ := Eval(c.Cadr(2), s).(int)
 		return a == b
 	},
 	Sym("*"): func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int64)
-		b, _ := Eval(c.Cadr(2), s).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int)
+		b, _ := Eval(c.Cadr(2), s).(int)
 		return a * b
 	},
 	Sym("/"): func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int64)
-		b, _ := Eval(c.Cadr(2), s).(int64)
+		a, _ := Eval(c.Cadr(1), s).(int)
+		b, _ := Eval(c.Cadr(2), s).(int)
 		return a / b
 	},
 }, nil}
