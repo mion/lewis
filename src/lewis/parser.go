@@ -15,7 +15,7 @@ func Categorize(s string) Any {
 	} else if b, err := scv.ParseBool(s); err == nil {
 		return b
 	} else {
-		return NewSymbol(s)
+		return Sym(s)
 	}
 }
 
