@@ -1,23 +1,31 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	. "lewis"
+	"os"
 )
 
+func REPL() {
+	fmt.Println("-- Lewis 0.1\n" +
+		"-- Type \"tutorial\" or \"example\" for more information.\n" +
+		"-- Use Ctrl+D to exit.")
+	scope := NewScope(GlobalScope)
+	reader := bufio.NewReader(os.Stdin)
+	for {
+		fmt.Print(">> ")
+		if input, err := reader.ReadString('\n'); err == nil {
+			p := Parse(input[:len(input)-1])
+			e := Eval(p, scope)
+			fmt.Println("=>", e)
+		} else {
+			fmt.Println("\nREPL terminated.")
+			return
+		}
+	}
+}
+
 func main() {
-	s := NewScope(GlobalScope)
-	ParseEvalPrint("(define add (lambda (a b) (+ a b)))", s)
-	ParseEvalPrint("(add 5 3)", s)
-	// examples := [...]string{
-	// 	"12",
-	// 	"(quote (a b c))",
-	// 	"(if (< 10 20) (+ 1 1) (+ 3 3))",
-	// 	"(define x 2)",
-	// 	"(+ x 1)",
-	// 	"(set! x (* x x))",
-	// 	"(define r 3)",
-	// 	"(lambda (r) (* 3.1415 (* r r)))",
-	// 	"(begin (set! x 1) (set! x (+ x 1)) (* x 2))",
-	// 	"(define square (lambda (x) (* x x))) (square 12)",
-	// }
+	REPL()
 }

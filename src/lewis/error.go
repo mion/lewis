@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-var Debugging = true
+var Debugging = false
 
 func Debug(a ...interface{}) {
 	if !Debugging {
