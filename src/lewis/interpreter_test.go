@@ -32,6 +32,19 @@ func checkNil(t *testing.T, x Any) bool {
 	}
 }
 
+func checkCellLen(t *testing.T, c *Cell, len int) bool {
+	if n := c.Len(); n != len {
+		t.Errorf("c.Len() = %d, want %d", n, len)
+		return false
+	}
+	return true
+}
+
+func TestCell(t *testing.T) {
+	c := Cons(nil, nil)
+	checkCellLen(t, c, 0)
+}
+
 func TestConstantLiteral(t *testing.T) {
 	var x Any
 	s := NewScope(GlobalScope)
@@ -91,6 +104,15 @@ func TestDefineAndSet(t *testing.T) {
 	Eval(Parse("(set! z -3)"), local)
 	checkVariables(t, above, map[string]Any{"y": 3, "z": -3})
 	checkVariables(t, local, map[string]Any{"x": 2, "y": 5})
+}
+
+func TestLambda(t *testing.T) {
+	s := NewScope(GlobalScope)
+	if lambda, ok := ParseEval("(lambda (x) (* x x))", s).(func(*Cell, *Scope) Any); ok {
+		c := Cons(nil, Cons(4, Cons(nil, nil)))
+		r := lambda(c, s)
+		checkInt(t, r, 16)
+	}
 }
 
 func TestEval(t *testing.T) {

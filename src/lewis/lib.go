@@ -1,5 +1,9 @@
 package lewis
 
+// import (
+// 	"fmt"
+// )
+
 var GlobalScope = &Scope{map[*Symbol]Any{
 	Sym("quote"): func(c *Cell, s *Scope) Any {
 		return c.Cadr(1)
@@ -30,6 +34,22 @@ var GlobalScope = &Scope{map[*Symbol]Any{
 		Debug("Define", variable, "as expression", exp)
 		s.Set(variable, exp)
 		return nil
+	},
+	Sym("lambda"): func(c *Cell, s *Scope) Any {
+		cellArgs := c.Cadr(1).(*Cell) // TODO: check
+		args := make([]*Symbol, cellArgs.Len())
+		for i := 0; i < cellArgs.Len(); i++ {
+			args[i] = cellArgs.Cadr(i).(*Symbol) // TODO: check type
+		}
+		body := c.Cadr(2) // TODO: Copy?
+		Debug("lambda form with args", args, "and body", body)
+		return func(cell *Cell, scope *Scope) Any {
+			local := NewScope(scope) // TODO: check possibly erroneous lexical scoping
+			for i, arg := range args {
+				local.Set(arg, cell.Cadr(i+1))
+			}
+			return Eval(body, local)
+		}
 	},
 	// Temporary
 	Sym("+"): func(c *Cell, s *Scope) Any {

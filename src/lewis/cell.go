@@ -101,3 +101,11 @@ func (c *Cell) Cadr(n int) Any {
 	}
 	return p.Car
 }
+
+func (c *Cell) Len() int {
+	if c == nil || c.IsNull() {
+		return 0
+	} else {
+		return 1 + c.Cdr.Len()
+	}
+}

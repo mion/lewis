@@ -1,5 +1,9 @@
 package lewis
 
+import (
+	"fmt"
+)
+
 func Eval(x Any, s *Scope) Any {
 	Debug("Evaluating", x, "in scope", s)
 	if sym, ok := x.(*Symbol); ok {
@@ -22,4 +26,12 @@ func Eval(x Any, s *Scope) Any {
 		Debug("Constant literal")
 		return x // literal
 	}
+}
+
+func ParseEval(in string, s *Scope) Any {
+	return Eval(Parse(in), s)
+}
+
+func ParseEvalPrint(in string, s *Scope) {
+	fmt.Println(ParseEval(in, s))
 }
