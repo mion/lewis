@@ -23,17 +23,12 @@ func (s *Symbol) String() string {
 	return s.string
 }
 
-var QuoteSymbol = Sym("quote")
-var IfSymbol = Sym("if")
-var SetSymbol = Sym("set!")
-var DefineSymbol = Sym("define")
-var LambdaSymbol = Sym("lambda")
-var BeginSymbol = Sym("begin")
-
 type Scope struct {
 	table  map[*Symbol]Any
 	parent *Scope
 }
+
+var GlobalScope = NewScope(nil).Import(SpecialFormsLibrary)
 
 func NewScope(parent *Scope) *Scope {
 	Scope := new(Scope)
@@ -43,9 +38,9 @@ func NewScope(parent *Scope) *Scope {
 }
 
 func (s *Scope) String() string {
-	if s.parent == nil {
-		return "Global"
-	}
+	// if s.parent == nil {
+	// 	return "Global"
+	// }
 	str := "{ "
 	for key, val := range s.table {
 		str += fmt.Sprintf("%v: %v, ", key, val)
@@ -78,4 +73,13 @@ func (s *Scope) Get(name *Symbol) Any {
 		return val
 	}
 	return nil
+}
+
+func (s *Scope) Import(l *Library) *Scope {
+	// TODO: check for conflicts
+	Debug("Importing library")
+	for name, fn := range l.functions {
+		s.table[Sym(name)] = fn
+	}
+	return s
 }

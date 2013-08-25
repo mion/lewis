@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-var Debugging = false
+var Debugging = true
 
 func Debug(a ...interface{}) {
 	if !Debugging {
@@ -26,6 +26,6 @@ func Error(a ...interface{}) interface{} {
 	for _, v := range a {
 		args += fmt.Sprint(v)
 	}
-	panic("[!] Evaluation error: " + args)
+	panic("[!] Error: " + args)
 	return nil
 }

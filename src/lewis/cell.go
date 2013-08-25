@@ -56,38 +56,38 @@ func (c *Cell) Print() {
 	}
 }
 
-func ident(str string, n int) string {
-	tabs := ""
-	for i := 0; i < n; i++ {
-		tabs += "\t"
-	}
-	return tabs + str + "\n"
-}
+// func ident(str string, n int) string {
+// 	tabs := ""
+// 	for i := 0; i < n; i++ {
+// 		tabs += "\t"
+// 	}
+// 	return tabs + str + "\n"
+// }
 
-func inspect(x Any, k int) string {
-	if x == nil {
-		return ident("nil", k)
-	}
-	if c, ok := x.(*Cell); ok {
-		if c.IsNull() {
-			return ident("~", k)
-		} else {
-			n := k
-			if _, ok := c.Car.(*Cell); ok {
-				n = k + 1
-			}
-			return inspect(c.Car, n) + inspect(c.Cdr, k)
-		}
-	} else if a, ok := x.(*Atom); ok {
-		return ident(fmt.Sprintf("%v", a.Value), k)
-	} else {
-		return ident(fmt.Sprintf("%v", x), k) // in case something weird is in there
-	}
-}
+// func inspect(x Any, k int) string {
+// 	if x == nil {
+// 		return ident("nil", k)
+// 	}
+// 	if c, ok := x.(*Cell); ok {
+// 		if c.IsNull() {
+// 			return ident("~", k)
+// 		} else {
+// 			n := k
+// 			if _, ok := c.Car.(*Cell); ok {
+// 				n = k + 1
+// 			}
+// 			return inspect(c.Car, n) + inspect(c.Cdr, k)
+// 		}
+// 	} else if a, ok := x.(*Atom); ok {
+// 		return ident(fmt.Sprintf("%v", a.Value), k)
+// 	} else {
+// 		return ident(fmt.Sprintf("%v", x), k) // in case something weird is in there
+// 	}
+// }
 
-func (c *Cell) Inspect() {
-	fmt.Println(inspect(c, 0))
-}
+// func (c *Cell) Inspect() {
+// 	fmt.Println(inspect(c, 0))
+// }
 
 func (c *Cell) IsNull() bool {
 	return c.Car == nil && c.Cdr == nil
