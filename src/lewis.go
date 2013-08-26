@@ -9,7 +9,7 @@ import (
 
 func REPL() {
 	fmt.Println("-- Lewis 0.1\n" +
-		"-- Type \"tutorial\" or \"example\" for more information.\n" +
+		"-- See README.md for more information.\n" +
 		"-- Use Ctrl+D to exit.")
 	scope := NewScope(GlobalScope)
 	reader := bufio.NewReader(os.Stdin)
