@@ -4,31 +4,12 @@ import (
 	"fmt"
 )
 
-type Symbol struct {
-	string
-}
-
-var symbols = make(map[string]*Symbol)
-
-func Sym(name string) *Symbol {
-	sym, ok := symbols[name]
-	if !ok {
-		sym = &Symbol{name}
-		symbols[name] = sym
-	}
-	return sym
-}
-
-func (s *Symbol) String() string {
-	return s.string
-}
-
 type Scope struct {
 	table  map[*Symbol]Any
 	parent *Scope
 }
 
-var GlobalScope = NewScope(nil).Import(SpecialFormsLibrary)
+var GlobalScope = NewScope(nil).Import(SpecialFormsLibrary).Import(OperatorsLibrary)
 
 func NewScope(parent *Scope) *Scope {
 	Scope := new(Scope)
@@ -38,9 +19,6 @@ func NewScope(parent *Scope) *Scope {
 }
 
 func (s *Scope) String() string {
-	// if s.parent == nil {
-	// 	return "Global"
-	// }
 	str := "{ "
 	for key, val := range s.table {
 		str += fmt.Sprintf("%v: %v, ", key, val)

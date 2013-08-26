@@ -14,7 +14,7 @@ var SpecialFormsLibrary = &Library{functions: map[string]Any{
 		return nil
 	},
 	"int64": func(c *Cell, s *Scope) Any {
-		return ConvertInt64(c.Cadr(1))
+		return ToInt64(c.Cadr(1))
 	},
 	"quote": func(c *Cell, s *Scope) Any {
 		return c.Cadr(1)
@@ -70,41 +70,41 @@ var SpecialFormsLibrary = &Library{functions: map[string]Any{
 		return res
 	},
 	// Temporary
-	"+": func(c *Cell, s *Scope) Any {
-		Debug("adding ", c.Cadr(1), "to", c.Cadr(2))
-		a, _ := Eval(c.Cadr(1), s).(int)
-		b, _ := Eval(c.Cadr(2), s).(int)
-		Debug("converted to int", a, "and ", b, "resulted", a+b)
-		return a + b
-	},
-	"-": func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int)
-		b, _ := Eval(c.Cadr(2), s).(int)
-		return a - b
-	},
-	"<": func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int)
-		b, _ := Eval(c.Cadr(2), s).(int)
-		return a < b
-	},
-	">": func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int)
-		b, _ := Eval(c.Cadr(2), s).(int)
-		return a > b
-	},
-	"=": func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int)
-		b, _ := Eval(c.Cadr(2), s).(int)
-		return a == b
-	},
-	"*": func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int)
-		b, _ := Eval(c.Cadr(2), s).(int)
-		return a * b
-	},
-	"/": func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int)
-		b, _ := Eval(c.Cadr(2), s).(int)
-		return a / b
-	},
+	// "+": func(c *Cell, s *Scope) Any {
+	// 	Debug("adding ", c.Cadr(1), "to", c.Cadr(2))
+	// 	a, _ := Eval(c.Cadr(1), s).(int)
+	// 	b, _ := Eval(c.Cadr(2), s).(int)
+	// 	Debug("converted to int", a, "and ", b, "resulted", a+b)
+	// 	return a + b
+	// },
+	// "-": func(c *Cell, s *Scope) Any {
+	// 	a, _ := Eval(c.Cadr(1), s).(int)
+	// 	b, _ := Eval(c.Cadr(2), s).(int)
+	// 	return a - b
+	// },
+	// "<": func(c *Cell, s *Scope) Any {
+	// 	a, _ := Eval(c.Cadr(1), s).(int)
+	// 	b, _ := Eval(c.Cadr(2), s).(int)
+	// 	return a < b
+	// },
+	// ">": func(c *Cell, s *Scope) Any {
+	// 	a, _ := Eval(c.Cadr(1), s).(int)
+	// 	b, _ := Eval(c.Cadr(2), s).(int)
+	// 	return a > b
+	// },
+	// "=": func(c *Cell, s *Scope) Any {
+	// 	a, _ := Eval(c.Cadr(1), s).(int)
+	// 	b, _ := Eval(c.Cadr(2), s).(int)
+	// 	return a == b
+	// },
+	// "*": func(c *Cell, s *Scope) Any {
+	// 	a, _ := Eval(c.Cadr(1), s).(int)
+	// 	b, _ := Eval(c.Cadr(2), s).(int)
+	// 	return a * b
+	// },
+	// "/": func(c *Cell, s *Scope) Any {
+	// 	a, _ := Eval(c.Cadr(1), s).(int)
+	// 	b, _ := Eval(c.Cadr(2), s).(int)
+	// 	return a / b
+	// },
 }}
