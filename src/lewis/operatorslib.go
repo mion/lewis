@@ -1,5 +1,9 @@
 package lewis
 
+import (
+	"reflect"
+)
+
 var OperatorsLibrary = &Library{functions: map[string]Any{
 	"+": func(c *Cell, s *Scope) Any {
 		result := int64(0)
@@ -30,9 +34,11 @@ var OperatorsLibrary = &Library{functions: map[string]Any{
 		return result
 	},
 	"=": func(c *Cell, s *Scope) Any {
-		a, _ := Eval(c.Cadr(1), s).(int64)
-		b, _ := Eval(c.Cadr(2), s).(int64)
-		return a == b
+		result := true
+		for i := 1; i < c.Len()-1; i++ {
+			result = result && reflect.DeepEqual(Eval(c.Cadr(i), s), Eval(c.Cadr(i+1), s))
+		}
+		return result
 	},
 	"<": func(c *Cell, s *Scope) Any {
 		a, _ := Eval(c.Cadr(1), s).(int64)
