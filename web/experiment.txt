@@ -1,0 +1,31 @@
+Language Design Experiment
+--------------------------
+
+Let's try to design a language that would be most suitable to writing modern applications, web and mobile, starting with web first.
+
+Twitter seems like an interesting option, as many people use it when writing tutorials for frameworks and such. Let's call our version "Mini" because of its lack of features -- for instance, it doesn't have a "forgot password" page.
+
+Mini Specification
+------------------
+
+The app consists of 8 pages:
+
+	STATIC
+		- landing 
+
+		- about
+
+	DYNAMIC
+		- login
+
+		- sign_up
+
+		- user: view/reply to tweets; post a new tweet; follow user;
+			(same page for the current user as well as others)
+
+		- follow: view/remove your followers and followees;
+
+		- search: list users and tweets according to certain criteria;
+			(every page past login -- the so-called "dynamic" pages -- has a search bar at the top which leads to this search results page, which includes both users and tweets)
+
+		- logout
