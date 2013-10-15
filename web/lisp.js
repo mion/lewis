@@ -13,7 +13,7 @@ terminal.setReadOnly(true);
 terminal.getSession().setMode("ace/mode/plain_text");
 terminal.setFontSize(16);
 
-// LittleLisp
+// Lisp interpreter
 ;(function(exports) {
   var library = {
     first: function(x) {
