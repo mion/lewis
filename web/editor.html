@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Lewis</title>
+  <title>Wiz</title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,28 +28,55 @@
 <body>
 
   <div class="container">
-    <h1>Lewis</h1>
+    <h1>Wiz</h1>
     <h5><i>This is not the programming language you're looking for.</i></h5>
     <hr>
     <div class="row">
-      <div class="col-lg-6">
-        <pre id="editor"></pre>
-      </div>
-      <div class="col-lg-6">
-        <pre id="terminal">
-Lewis 0.1
-by Gabriel L. Vieira
---------------------
 
-Are you ready for an orgastic debugging experience?
-Write some code and hit "Evaluate".
-</pre>     
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <div class="row">
+            <div class="col-lg-6">
+              <pre id="editor">
+; Hmm... something isn't right here.
+
+(func add-two (k)
+  (set y (+ k 3))
+  y)
+
+(set x (add-two 5))
+</pre>
+            </div>
+
+            <div class="col-lg-6">
+              <pre id="terminal"></pre>     
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button id="btn-play" class="btn btn-default" type="button">
+                    <i class="glyphicon glyphicon-play"></i>
+                  </button>
+                </span>
+                <input type="text" class="form-control" placeholder="Type in some code...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" disabled="disabled" type="button"><i class="glyphicon glyphicon-arrow-up"></i></button>
+                  <button class="btn btn-default" disabled="disabled" type="button"><i class="glyphicon glyphicon-arrow-down"></i></button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
-    <button id="btn-eval" class="btn btn-primary btn-lg">Evaluate</button>
   </div>
 
   <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-  <script src="lisp.js"></script>
+  <script src="lang.js"></script>
 </body>
 </html>

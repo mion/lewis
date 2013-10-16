@@ -1,22 +1,55 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Bootstrap 101 Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<html lang="en">
+<head>
+  <title>Lewis</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <style type="text/css" media="screen">
+    body {
+        overflow: hidden;
+    }
+    
+    #editor { 
+      height: 300px;
+/*        margin: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+*/    }
+    #terminal {
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="//code.jquery.com/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-  </body>
+  <div class="container">
+    <h1>Lewis</h1>
+    <h5><i>This is not the programming language you're looking for.</i></h5>
+    <hr>
+    <div class="row">
+      <div class="col-lg-6">
+        <pre id="editor"></pre>
+      </div>
+      <div class="col-lg-6">
+        <pre id="terminal">
+Lewis 0.1
+by Gabriel L. Vieira
+--------------------
+
+Are you ready for an orgastic debugging experience?
+Write some code and hit "Evaluate".
+</pre>     
+      </div>
+    </div>
+    <button id="btn-eval" class="btn btn-primary btn-lg">Evaluate</button>
+  </div>
+
+  <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="lisp.js"></script>
+</body>
 </html>
