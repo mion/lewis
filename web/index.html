@@ -12,11 +12,14 @@
     }
     #editor { 
         height: 400px;
+        font-family: "Inconsolata";
+        position: relative;
         width: 50%;
         float: left;
     }
     #terminal { 
         height: 400px;
+        position: relative;
         width: 50%;
         float: right;
     }
@@ -42,6 +45,7 @@ var sort = function(a) {
 
 y = sort(x);</pre>
   <pre id="terminal"></pre>
+  <button id="btn-eval" class="btn btn-primary" type="button"><i class="glyphicon glyphicon-arrow-down"></i></button>
   <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="navi.js"></script>
 </body>

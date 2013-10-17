@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Javascript eval() - How Much Is Too Much?</title>
+</head>
+<body>
+ 
+	<h1>
+		Javascript eval() - How Much Is Too Much?
+	</h1>
+ 
+	<!--
+		Note that the TYPE of this Script tag is not Javascript,
+		but rather "source-code". We will be putting code in
+		here to see if it executes properly within an eval()
+		function call.
+	-->
+	<script id="source" type="text/source-code">
+ 
+		// Create a self-executing function. This is to ensure that
+		// nothing defined here goes into the global scope (helps to
+		// figure out what bindings are taking place).
+		(function(){
+ 
+			// Create a local value.
+			var description = "beautiful";
+ 
+			// Create a function. This function will reference both
+			// the local variable above as well as one that has
+			// not yet been bound to this context.
+			var whisperSweetNothings = function(){
+ 
+				// Alert a message that combines the local, private
+				// scope and some other scoped-variable (name).
+				console.log(
+					name +
+					", you are looking quite " +
+					description +
+					" today."
+				);
+ 
+			};
+ 
+			// Return function.
+			return( whisperSweetNothings );
+ 
+		})();
+ 
+	</script>
+ 
+	<!--
+		Now, let's actually run some Javascript where we evaluate
+		the source-code defined above.
+	-->
+	<script type="text/javascript">
+ 
+		// Create a self-executing function. This one is to ensure
+		// that any binding isn't simply going to the window scope.
+		(function(){
+ 
+			// Get the source code element.
+			var source = document.getElementById( "source" );
+ 
+			// Create a local variable for the name.
+			var name = "Erika";
+ 
+			// Evaluate the source code, which should return a
+			// function reference.
+			var whisperSweetNothings = eval( source.innerHTML );
+ 
+ 
+			// Try to execute this function.
+			//
+			// NOTE: This function uses reference defined in two
+			// different self-execution functions. This will help us
+			// understand how the closure is being created.
+			whisperSweetNothings();
+ 
+		})();
+ 
+	</script>
+ 
+</body>
+</html>
