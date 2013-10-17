@@ -31,6 +31,10 @@ function output(s) {
     };
   };
 
+  var stdlib = {
+    '*':
+  }
+
   var global = new Env({});
 
   var interpret = function(str) {
@@ -46,7 +50,8 @@ function output(s) {
   }
 
   var debug = function(msg) {
-    console.log(msg);
+    //console.log(msg);
+    return;
   }
 
   // TODO: check list size, etc.

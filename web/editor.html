@@ -39,13 +39,16 @@
           <div class="row">
             <div class="col-lg-6">
               <pre id="editor">
-; Hmm... something isn't right here.
+; Wiz example 
 
-(func add-two (k)
-  (set y (+ k 3))
-  y)
+(def id 5)
 
-(set x (add-two 5))
+(def square 
+  (func (x) 
+    (* x x)))
+    
+(square id)
+
 </pre>
             </div>
 

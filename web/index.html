@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Lewis</title>
+  <title>Navi</title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,46 +10,39 @@
     body {
         overflow: hidden;
     }
-    
     #editor { 
-      height: 300px;
-/*        margin: 0;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-*/    }
-    #terminal {
-      height: 300px;
+        height: 400px;
+        width: 50%;
+        float: left;
+    }
+    #terminal { 
+        height: 400px;
+        width: 50%;
+        float: right;
     }
   </style>
 </head>
 <body>
+  <pre id="editor">
+var k = 3;
+var x = [5, 0, -1, 3, 8, 2, 7];
 
-  <div class="container">
-    <h1>Lewis</h1>
-    <h5><i>This is not the programming language you're looking for.</i></h5>
-    <hr>
-    <div class="row">
-      <div class="col-lg-6">
-        <pre id="editor"></pre>
-      </div>
-      <div class="col-lg-6">
-        <pre id="terminal">
-Lewis 0.1
-by Gabriel L. Vieira
---------------------
+var sort = function(a) {
+  for (var i = 0; i < a.length; i++) {
+    for (var j = 0; j < a.length; j++) {
+      if (a[i] > a[j]) {
+        var temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+      }
+    }
+  }
+  return a;
+};
 
-Are you ready for an orgastic debugging experience?
-Write some code and hit "Evaluate".
-</pre>     
-      </div>
-    </div>
-    <button id="btn-eval" class="btn btn-primary btn-lg">Evaluate</button>
-  </div>
-
+y = sort(x);</pre>
+  <pre id="terminal"></pre>
   <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-  <script src="lisp.js"></script>
+  <script src="navi.js"></script>
 </body>
 </html>
