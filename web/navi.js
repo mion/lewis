@@ -1,17 +1,17 @@
 var editor = ace.edit("editor");
-editor.setTheme("ace/theme/ambiance");
+editor.setTheme("ace/theme/monokai");
 editor.getSession().setMode("ace/mode/javascript");
 editor.setFontSize(18);
 editor.getSession().setTabSize(4);
 editor.getSession().setUseSoftTabs(true);
 
 var terminal = ace.edit("terminal");
-terminal.setTheme("ace/theme/terminal");
+terminal.setTheme("ace/theme/ambiance");
 terminal.getSession().setMode("ace/mode/javascript");
+terminal.setFontSize(18);
 terminal.renderer.setShowGutter(false);
 terminal.setHighlightActiveLine(false);
 terminal.setReadOnly(true);
-terminal.setFontSize(16);
 
 if(typeof(String.prototype.trim) === "undefined")
 {
@@ -21,13 +21,16 @@ if(typeof(String.prototype.trim) === "undefined")
     };
 }
 
-function printInput (s) { if (s) {s.trim();} terminal.insert(s + "\n"); };
-function printOutput (s) { if (s) {s.trim();} terminal.insert("=> " + s + "\n"); };
+// Restore code
+editor.session.setValue($.jStorage.get("source", ""));
+
+function printInput (s) { terminal.insert(s + "\n"); };
+function printOutput (s) { terminal.insert("=> " + s + "\n"); };
 
 function execute () {
   "use strict";
   var text = editor.session.getTextRange(editor.getSelectionRange());
-  printInput(text);
+  printInput(text.trim());
   try {
     var result = window.eval(text);
     printOutput(result ? result.toSource() : result);
@@ -47,5 +50,13 @@ editor.commands.addCommand({
     exec: execute,
     readOnly: true // false if this command should not apply in readOnly mode
 });
-
-document.getElementById("btn-eval").onclick = execute;
+editor.commands.addCommand({
+    name: 'save',
+    bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
+    exec: function () {
+      var sourceCode = editor.session.getValue();
+      $.jStorage.set("source", sourceCode);
+      console.log("Saved.");
+    },
+    readOnly: true // false if this command should not apply in readOnly mode
+});
