@@ -5,6 +5,7 @@ import (
 	"fmt"
 	. "lewis"
 	"os"
+	"io/ioutil"
 )
 
 func REPL() {
@@ -26,6 +27,23 @@ func REPL() {
 	}
 }
 
+func execute(source string) {
+	scope := NewScope(GlobalScope)
+	p := Parse(source)
+	Eval(p, scope)
+}
+
 func main() {
-	REPL()
+	if len(os.Args) < 2 {
+		REPL()	
+	} else {
+		filename := os.Args[1]
+		contents, err := ioutil.ReadFile(filename)
+		if err != nil {
+			fmt.Println("ERROR: unable to open file '", filename, "'")
+		}
+		source := string(contents)
+		fmt.Println(source)
+		execute(source)
+	}
 }

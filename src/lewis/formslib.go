@@ -38,7 +38,7 @@ var SpecialFormsLibrary = &Library{functions: map[string]Any{
 		s.Find(variable).Set(variable, Eval(exp, s))
 		return nil
 	},
-	"define": func(c *Cell, s *Scope) Any {
+	"def": func(c *Cell, s *Scope) Any {
 		Debug("define form called on cell", c, "in scope", s)
 		variable, _ := c.Cadr(1).(*Symbol) // TODO: check error
 		exp := Eval(c.Cadr(2), s)
@@ -46,7 +46,7 @@ var SpecialFormsLibrary = &Library{functions: map[string]Any{
 		s.Set(variable, exp)
 		return nil
 	},
-	"lambda": func(c *Cell, s *Scope) Any {
+	"func": func(c *Cell, s *Scope) Any {
 		cellArgs := c.Cadr(1).(*Cell) // TODO: check
 		args := make([]*Symbol, cellArgs.Len())
 		for i := 0; i < cellArgs.Len(); i++ {
@@ -62,7 +62,7 @@ var SpecialFormsLibrary = &Library{functions: map[string]Any{
 			return Eval(body, local)
 		}
 	},
-	"begin": func(c *Cell, s *Scope) Any {
+	"do": func(c *Cell, s *Scope) Any {
 		var res Any
 		for i := 1; i < c.Len(); i++ {
 			res = Eval(c.Cadr(i), s)
