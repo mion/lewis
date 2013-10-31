@@ -1,5 +1,7 @@
-(define factorial
-	(lambda (n)
+(def factorial
+	(func (n)
 		(if (<= n 2)
 			n
-			(* (factorial n - 1) (factorial n - 2)))))
+			(* (factorial n - 1) (factorial n - 2))))) 
+
+(print (factorial 5))

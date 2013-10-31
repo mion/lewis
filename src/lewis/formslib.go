@@ -1,5 +1,9 @@
 package lewis
 
+import (
+	"fmt"
+)
+
 var SpecialFormsLibrary = &Library{functions: map[string]Any{
 	"import": func(c *Cell, s *Scope) Any {
 		name, ok := c.Cadr(1).(*Symbol)
@@ -15,6 +19,10 @@ var SpecialFormsLibrary = &Library{functions: map[string]Any{
 	},
 	"int64": func(c *Cell, s *Scope) Any {
 		return ToInt64(c.Cadr(1))
+	},
+	"print": func(c *Cell, s *Scope) Any {
+		fmt.Println(Eval(c.Cadr(1), s))
+		return nil
 	},
 	"quote": func(c *Cell, s *Scope) Any {
 		return c.Cadr(1)

@@ -6,9 +6,10 @@ import (
 	. "lewis"
 	"os"
 	"io/ioutil"
+	str "strings"
 )
 
-func REPL() {
+func startREPL() {
 	fmt.Println("-- Lewis 0.1\n" +
 		"-- See README.md for more information.\n" +
 		"-- Use Ctrl+D to exit.")
@@ -27,23 +28,26 @@ func REPL() {
 	}
 }
 
-func execute(source string) {
+func runFile(source string) {
 	scope := NewScope(GlobalScope)
-	p := Parse(source)
-	Eval(p, scope)
+
+	lines := str.Split(source, "\n\n")
+	for _, line := range lines {
+		expr := Parse(line)
+		Eval(expr, scope)
+	}
 }
 
 func main() {
 	if len(os.Args) < 2 {
-		REPL()	
+		startREPL()	
 	} else {
 		filename := os.Args[1]
-		contents, err := ioutil.ReadFile(filename)
+		data, err := ioutil.ReadFile(filename)
 		if err != nil {
-			fmt.Println("ERROR: unable to open file '", filename, "'")
+			fmt.Println("[!] Error: unable to open file '", filename, "'")
 		}
-		source := string(contents)
-		fmt.Println(source)
-		execute(source)
+		source := string(data)
+		runFile(source)
 	}
 }
