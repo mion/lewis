@@ -4,22 +4,21 @@ Lewis is a dialect of Lisp that interoperates with Go (à la Clojure).
 
 # Installation
 
-Make sure you have Go installed, then:
-
-1. Clone the repo:
+Make sure you have Go installed, then clone the repo:
 
 	$ git clone https://github.com/mion/lewis.git
 
-2. Setup the workspace (Go environment variables):
+Setup the workspace (Go environment variables):
 	
 	$ cd lewis
 	$ source setup_workspace.sh
 
-3. Build it:
+Build it:
 
 	$ sh build.sh
 
-4. Start the REPL:
+
+Start the REPL:
 
 	$ lewis
 
