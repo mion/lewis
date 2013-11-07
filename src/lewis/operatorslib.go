@@ -13,8 +13,11 @@ var OperatorsLibrary = &Library{functions: map[string]Any{
 		return result
 	},
 	"-": func(c *Cell, s *Scope) Any {
-		result := int64(0)
-		for i := 1; i < c.Len(); i++ {
+		if c.Len() == 2 {
+			return -Eval(c.Cadr(1), s).(int64)
+		}
+		result := Eval(c.Cadr(1), s).(int64)
+		for i := 2; i < c.Len(); i++ {
 			result -= Eval(c.Cadr(i), s).(int64)
 		}
 		return result

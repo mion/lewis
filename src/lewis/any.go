@@ -1,5 +1,10 @@
 package lewis
 
+import (
+	rfl "reflect"
+	"fmt"
+)
+
 type Any interface{}
 
 func ToInt64(a Any) int64 {
@@ -13,4 +18,8 @@ func ToInt64(a Any) int64 {
 	default:
 		return int64(0)
 	}
+}
+
+func Inspect(a Any) {
+	fmt.Println("Type:", rfl.TypeOf(a))
 }
