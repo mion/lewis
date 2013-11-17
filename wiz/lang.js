@@ -1,22 +1,3 @@
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/monokai");
-editor.getSession().setMode("ace/mode/lisp");
-editor.setFontSize(16);
-editor.getSession().setTabSize(2);
-editor.getSession().setUseSoftTabs(true);
-
-var terminal = ace.edit("terminal");
-terminal.setTheme("ace/theme/ambiance");
-terminal.renderer.setShowGutter(false);
-terminal.setHighlightActiveLine(false);
-terminal.setReadOnly(true);
-terminal.getSession().setMode("ace/mode/lisp");
-terminal.setFontSize(16);
-
-function output(s) {
-  terminal.setValue(s);
-};
-
 ;(function(exports) {
   var Env = function(scope, parent) {
     this.scope = scope;
@@ -170,5 +151,3 @@ function output(s) {
 function naviPlay() {
   lisp.interpret(editor.getValue());
 };
-
-document.getElementById("btn-play").onclick = naviPlay;

@@ -16,6 +16,10 @@ func Compare(a Any, b Any) {
 	bType := rfl.TypeOf(b)
 }
 
+/*
+(func (x) (* x x))
+*/
+
 func main() {
 	i := 5
 	j := int64(3)
