@@ -1,6 +1,6 @@
-# Lewis (Work in Progress)
+# Lewis
 
-Lewis is a dialect of Lisp that interoperates with Go (à la Clojure).
+Lewis is a tiny dialect of Lisp that interoperates with Go (à la Clojure).
 
 # Installation
 
